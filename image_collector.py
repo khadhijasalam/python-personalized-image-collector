@@ -282,7 +282,7 @@ class ProfileImageScraperGUI:
         try:
             # Method 1: DuckDuckGo Images (more lenient than Google)
             self.log_message("Trying DuckDuckGo Images...")
-            ddg_url = f"https://duckduckgo.com/?q={person_name.replace(' ', '+')}+profile&iax=images&ia=images"
+            ddg_url = f"https://duckduckgo.com/?q={person_name.replace(' ', '+')}+face+profile&iax=images&ia=images"
             
             headers = {
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
@@ -314,7 +314,7 @@ class ProfileImageScraperGUI:
             # Method 2: Try Bing Images
             if len(images) < max_results and self.is_scraping:
                 self.log_message("Trying Bing Images...")
-                bing_url = f"https://www.bing.com/images/search?q={person_name.replace(' ', '+')}+profile"
+                bing_url = f"https://www.bing.com/images/search?q={person_name.replace(' ', '+')}+face+profile"
                 
                 response = self.session.get(bing_url, headers=headers, timeout=10)
                 if response.status_code == 200:
@@ -376,8 +376,9 @@ class ProfileImageScraperGUI:
         images = []
         try:
             # Method 1: Try different search variations
+            #####Change 1
             search_queries = [
-                f"{person_name.replace(' ', '+')}+profile+picture",
+                f"{person_name.replace(' ', '+')}+face+profile+picture",
                 f"{person_name.replace(' ', '+')}+headshot",
                 f"{person_name.replace(' ', '+')}+photo",
                 f'"{person_name}"+image'
